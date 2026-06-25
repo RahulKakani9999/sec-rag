@@ -1,0 +1,9 @@
+[
+  {
+    "question": "What was the company's total revenue in fiscal 2023?",
+    "answer": "FILL IN the known correct answer",
+    "company": "AAPL",
+    "year": 2023,
+    "source_hint": "Consolidated Statements of Operations"
+  }
+]
