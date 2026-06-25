@@ -1,9 +1,74 @@
 [
   {
-    "question": "What was the company's total revenue in fiscal 2023?",
-    "answer": "FILL IN the known correct answer",
+    "question": "What was Apple's total net sales in fiscal 2025?",
+    "ground_truth": "Apple's total net sales in fiscal 2025 were $416,161 million.",
     "company": "AAPL",
-    "year": 2023,
-    "source_hint": "Consolidated Statements of Operations"
+    "year": 2025,
+    "source_hint": "Item 7 – MD&A / Item 8 – Financial Statements (Consolidated Statements of Operations)"
+  },
+  {
+    "question": "By what percentage did Apple's total net sales grow from fiscal 2024 to fiscal 2025?",
+    "ground_truth": "Apple's total net sales grew by 6% from $391,035 million in fiscal 2024 to $416,161 million in fiscal 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 – MD&A (net sales comparison table)"
+  },
+  {
+    "question": "What were Apple's net sales in the Americas segment in fiscal 2025?",
+    "ground_truth": "Apple's net sales in the Americas segment in fiscal 2025 were $178,353 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 – Financial Statements (geographic segment note)"
+  },
+  {
+    "question": "Where is Apple's corporate headquarters located?",
+    "ground_truth": "Apple's corporate headquarters is located at One Apple Park Way, Cupertino, California 95014.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Cover page / Item 2 – Properties"
+  },
+  {
+    "question": "What was the approximate aggregate market value of Apple's stock held by non-affiliates as of March 28, 2025?",
+    "ground_truth": "The approximate aggregate market value of Apple's voting and non-voting stock held by non-affiliates was approximately $3,253,431,000,000 as of March 28, 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Cover page (SEC filing header)"
+  },
+
+  {
+    "_note": "── ADD YOUR OWN QUESTIONS BELOW ─────────────────────────────────────────",
+    "question": "FILL IN your question here",
+    "ground_truth": "FILL IN the exact expected answer (quote numbers directly from the filing)",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "FILL IN: e.g. Item 8 – Financial Statements (balance sheet)"
+  },
+  {
+    "question": "FILL IN — e.g. What were Apple's total assets as of September 27, 2025?",
+    "ground_truth": "FILL IN — e.g. Apple's total assets were $X million as of September 27, 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 – Financial Statements (Consolidated Balance Sheets)"
+  },
+  {
+    "question": "FILL IN — e.g. What was Apple's gross margin in fiscal 2025?",
+    "ground_truth": "FILL IN — exact gross margin figure or percentage from MD&A",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 – MD&A (gross margin discussion)"
+  },
+  {
+    "question": "FILL IN — e.g. What were Apple's Greater China net sales in fiscal 2025?",
+    "ground_truth": "FILL IN — $X million",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 – Financial Statements (geographic segment note)"
+  },
+  {
+    "question": "FILL IN — e.g. What were Apple's Services net sales in fiscal 2025?",
+    "ground_truth": "FILL IN",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 – MD&A (Products and Services Performance)"
   }
 ]
