@@ -1,74 +1,456 @@
 [
   {
-    "question": "What was Apple's total net sales in fiscal 2025?",
-    "ground_truth": "Apple's total net sales in fiscal 2025 were $416,161 million.",
+    "id": "lookup_01",
+    "category": "direct_lookup",
+    "question": "What were Apple's total net sales in fiscal 2025?",
+    "answer": "$416,161 million (approximately $416.2 billion).",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 7 – MD&A / Item 8 – Financial Statements (Consolidated Statements of Operations)"
+    "source_hint": "Item 8 - Consolidated Statements of Operations / Segment net sales"
   },
   {
-    "question": "By what percentage did Apple's total net sales grow from fiscal 2024 to fiscal 2025?",
-    "ground_truth": "Apple's total net sales grew by 6% from $391,035 million in fiscal 2024 to $416,161 million in fiscal 2025.",
+    "id": "lookup_02",
+    "category": "direct_lookup",
+    "question": "What was Apple's net income in fiscal 2025?",
+    "answer": "$112,010 million (approximately $112 billion).",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 7 – MD&A (net sales comparison table)"
+    "source_hint": "Item 8 - Consolidated Statements of Operations"
   },
   {
+    "id": "lookup_03",
+    "category": "direct_lookup",
+    "question": "How much did Apple spend on research and development in fiscal 2025?",
+    "answer": "$34,550 million (approximately $34.6 billion).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Operating Expenses / Item 8 - Statements of Operations"
+  },
+  {
+    "id": "lookup_04",
+    "category": "direct_lookup",
+    "question": "What was Apple's total gross margin in fiscal 2025?",
+    "answer": "$195,201 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Statements of Operations"
+  },
+  {
+    "id": "lookup_05",
+    "category": "direct_lookup",
+    "question": "What was Apple's operating income in fiscal 2025?",
+    "answer": "$133,050 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Statements of Operations"
+  },
+  {
+    "id": "lookup_06",
+    "category": "direct_lookup",
+    "question": "What were Apple's iPhone net sales in fiscal 2025?",
+    "answer": "$209,586 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Products and Services Performance (net sales by category)"
+  },
+  {
+    "id": "lookup_07",
+    "category": "direct_lookup",
+    "question": "What were Apple's Services net sales in fiscal 2025?",
+    "answer": "$109,158 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Products and Services Performance / Statements of Operations"
+  },
+  {
+    "id": "lookup_08",
+    "category": "direct_lookup",
+    "question": "What were Apple's net sales in the Greater China segment in fiscal 2025?",
+    "answer": "$64,377 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Segment Operating Performance (net sales by reportable segment)"
+  },
+  {
+    "id": "lookup_09",
+    "category": "direct_lookup",
     "question": "What were Apple's net sales in the Americas segment in fiscal 2025?",
-    "ground_truth": "Apple's net sales in the Americas segment in fiscal 2025 were $178,353 million.",
+    "answer": "$178,353 million.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 8 – Financial Statements (geographic segment note)"
+    "source_hint": "Item 7 - Segment Operating Performance / Note 13 Segment Information"
   },
   {
+    "id": "lookup_10",
+    "category": "direct_lookup",
+    "question": "Approximately how many full-time equivalent employees did Apple have as of September 27, 2025?",
+    "answer": "Approximately 166,000 full-time equivalent employees.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 1 - Human Capital"
+  },
+  {
+    "id": "lookup_11",
+    "category": "direct_lookup",
+    "question": "What was Apple's diluted earnings per share in fiscal 2025?",
+    "answer": "$7.46.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Statements of Operations"
+  },
+  {
+    "id": "lookup_12",
+    "category": "direct_lookup",
+    "question": "What was Apple's basic earnings per share in fiscal 2025?",
+    "answer": "$7.49.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Statements of Operations"
+  },
+  {
+    "id": "lookup_13",
+    "category": "direct_lookup",
+    "question": "What was Apple's total cash and cash equivalents on the balance sheet as of September 27, 2025?",
+    "answer": "$35,934 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Balance Sheets"
+  },
+  {
+    "id": "lookup_14",
+    "category": "direct_lookup",
+    "question": "What were Apple's total assets as of September 27, 2025?",
+    "answer": "$359,241 million.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Balance Sheets"
+  },
+  {
+    "id": "lookup_15",
+    "category": "direct_lookup",
     "question": "Where is Apple's corporate headquarters located?",
-    "ground_truth": "Apple's corporate headquarters is located at One Apple Park Way, Cupertino, California 95014.",
+    "answer": "Cupertino, California.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Cover page / Item 2 – Properties"
-  },
-  {
-    "question": "What was the approximate aggregate market value of Apple's stock held by non-affiliates as of March 28, 2025?",
-    "ground_truth": "The approximate aggregate market value of Apple's voting and non-voting stock held by non-affiliates was approximately $3,253,431,000,000 as of March 28, 2025.",
-    "company": "AAPL",
-    "year": 2025,
-    "source_hint": "Cover page (SEC filing header)"
+    "source_hint": "Cover page / Item 2 - Properties"
   },
 
   {
-    "_note": "── ADD YOUR OWN QUESTIONS BELOW ─────────────────────────────────────────",
-    "question": "FILL IN your question here",
-    "ground_truth": "FILL IN the exact expected answer (quote numbers directly from the filing)",
+    "id": "reasoning_01",
+    "category": "reasoning",
+    "question": "Which of Apple's geographic segments saw a decline in net sales in fiscal 2025 compared to 2024?",
+    "answer": "Greater China, where net sales decreased about 4% (from $66,952 million in 2024 to $64,377 million in 2025), primarily due to lower iPhone net sales.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "FILL IN: e.g. Item 8 – Financial Statements (balance sheet)"
+    "source_hint": "Item 7 - Segment Operating Performance"
   },
   {
-    "question": "FILL IN — e.g. What were Apple's total assets as of September 27, 2025?",
-    "ground_truth": "FILL IN — e.g. Apple's total assets were $X million as of September 27, 2025.",
+    "id": "reasoning_02",
+    "category": "reasoning",
+    "question": "What was the primary driver of the growth in Apple's R&D expense in fiscal 2025?",
+    "answer": "The growth was primarily driven by increases in headcount-related expenses and infrastructure-related costs.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 8 – Financial Statements (Consolidated Balance Sheets)"
+    "source_hint": "Item 7 - Research and Development"
   },
   {
-    "question": "FILL IN — e.g. What was Apple's gross margin in fiscal 2025?",
-    "ground_truth": "FILL IN — exact gross margin figure or percentage from MD&A",
+    "id": "reasoning_03",
+    "category": "reasoning",
+    "question": "Which product category was Apple's largest source of net sales in fiscal 2025?",
+    "answer": "iPhone, with $209,586 million in net sales, the largest single category.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 7 – MD&A (gross margin discussion)"
+    "source_hint": "Item 7 - Products and Services Performance"
   },
   {
-    "question": "FILL IN — e.g. What were Apple's Greater China net sales in fiscal 2025?",
-    "ground_truth": "FILL IN — $X million",
+    "id": "reasoning_04",
+    "category": "reasoning",
+    "question": "Why did Apple's effective tax rate decrease in fiscal 2025 compared to fiscal 2024?",
+    "answer": "Mainly due to a $10.7 billion year-over-year decrease in the provision for income taxes related to the State Aid Decision, plus the impact of changes in unrecognized tax benefits, partially offset by a change in valuation allowance and a higher effective tax rate on foreign earnings.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 8 – Financial Statements (geographic segment note)"
+    "source_hint": "Item 7 - Provision for Income Taxes"
   },
   {
-    "question": "FILL IN — e.g. What were Apple's Services net sales in fiscal 2025?",
-    "ground_truth": "FILL IN",
+    "id": "reasoning_05",
+    "category": "reasoning",
+    "question": "Which product category saw a decline in net sales in fiscal 2025 compared to 2024?",
+    "answer": "Wearables, Home and Accessories, which decreased about 4% (from $37,005 million in 2024 to $35,686 million in 2025), primarily due to lower sales of Accessories and Wearables.",
     "company": "AAPL",
     "year": 2025,
-    "source_hint": "Item 7 – MD&A (Products and Services Performance)"
+    "source_hint": "Item 7 - Products and Services Performance"
+  },
+  {
+    "id": "reasoning_06",
+    "category": "reasoning",
+    "question": "What proportion of Apple's total net sales came through its indirect distribution channels in 2025?",
+    "answer": "60% of total net sales came through indirect distribution channels, with the remaining 40% through direct channels.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 1 - Business (distribution)"
+  },
+  {
+    "id": "reasoning_07",
+    "category": "reasoning",
+    "question": "Did Apple's Services gross margin percentage improve or decline in fiscal 2025 versus 2024, and roughly what was it?",
+    "answer": "It improved, rising to 75.4% in 2025 from 73.9% in 2024.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Gross Margin"
+  },
+  {
+    "id": "reasoning_08",
+    "category": "reasoning",
+    "question": "Which segment had the highest percentage growth in net sales in fiscal 2025 compared to 2024?",
+    "answer": "Japan, with about 15% growth (from $25,052 million in 2024 to $28,703 million in 2025).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Segment Operating Performance"
+  },
+  {
+    "id": "reasoning_09",
+    "category": "reasoning",
+    "question": "In which countries are a number of Apple's subsidiaries organized for tax purposes, according to the risk factors?",
+    "answer": "Ireland and Singapore.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 1A - Risk Factors (tax)"
+  },
+  {
+    "id": "reasoning_10",
+    "category": "reasoning",
+    "question": "What new external cost pressure beginning in the second quarter of 2025 is discussed as affecting Apple's supply chain and margins?",
+    "answer": "New U.S. tariffs announced beginning in the second quarter of 2025 on imports to the U.S., including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU, with reciprocal/retaliatory measures from other countries.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 1A - Risk Factors (international trade / tariffs)"
+  },
+
+  {
+    "id": "calc_01",
+    "category": "calculation",
+    "question": "By what dollar amount did Apple's total net sales increase from fiscal 2024 to fiscal 2025?",
+    "answer": "$25,126 million ($416,161 million minus $391,035 million).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations (2025 vs 2024)"
+  },
+  {
+    "id": "calc_02",
+    "category": "calculation",
+    "question": "What was the year-over-year dollar increase in Apple's net income from fiscal 2024 to fiscal 2025?",
+    "answer": "$18,274 million ($112,010 million minus $93,736 million).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations (2025 vs 2024)"
+  },
+  {
+    "id": "calc_03",
+    "category": "calculation",
+    "question": "What were Apple's total operating expenses in fiscal 2025, combining R&D and SG&A?",
+    "answer": "$62,151 million ($34,550 million R&D plus $27,601 million SG&A).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations"
+  },
+  {
+    "id": "calc_04",
+    "category": "calculation",
+    "question": "What was Apple's net income as a percentage of total net sales (net profit margin) in fiscal 2025? Approximate it.",
+    "answer": "Approximately 26.9% ($112,010 million net income divided by $416,161 million total net sales).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations"
+  },
+  {
+    "id": "calc_05",
+    "category": "calculation",
+    "question": "How much more did Products net sales contribute than Services net sales in fiscal 2025?",
+    "answer": "$197,845 million more ($307,003 million Products minus $109,158 million Services).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations (Net sales)"
+  },
+  {
+    "id": "calc_06",
+    "category": "calculation",
+    "question": "What was the dollar increase in Apple's R&D expense from fiscal 2024 to fiscal 2025?",
+    "answer": "$3,180 million ($34,550 million minus $31,370 million).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Operating Expenses"
+  },
+  {
+    "id": "calc_07",
+    "category": "calculation",
+    "question": "What were Apple's total liabilities as of September 27, 2025, given total assets of $359,241 million and total shareholders' equity of $73,733 million?",
+    "answer": "$285,508 million (total assets minus total shareholders' equity), which matches the balance sheet.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Consolidated Balance Sheets"
+  },
+  {
+    "id": "calc_08",
+    "category": "calculation",
+    "question": "By how much did Apple's total cost of sales change from fiscal 2024 to fiscal 2025?",
+    "answer": "It increased by $10,608 million ($220,960 million in 2025 minus $210,352 million in 2024).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations"
+  },
+  {
+    "id": "calc_09",
+    "category": "calculation",
+    "question": "What was the combined net sales of Apple's Europe and Japan segments in fiscal 2025?",
+    "answer": "$139,735 million ($111,032 million Europe plus $28,703 million Japan).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Segment Operating Performance"
+  },
+  {
+    "id": "calc_10",
+    "category": "calculation",
+    "question": "What percentage of Apple's total net sales did Services represent in fiscal 2025? Approximate it.",
+    "answer": "Approximately 26.2% ($109,158 million Services divided by $416,161 million total net sales).",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Products and Services Performance"
+  },
+
+  {
+    "id": "trend_01",
+    "category": "comparison_trend",
+    "question": "How did Apple's total net sales trend across fiscal 2023, 2024, and 2025?",
+    "answer": "They rose each year: $383,285 million in 2023, $391,035 million in 2024, and $416,161 million in 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations / Segment tables"
+  },
+  {
+    "id": "trend_02",
+    "category": "comparison_trend",
+    "question": "How did Apple's Services net sales trend from fiscal 2023 to fiscal 2025?",
+    "answer": "They grew each year: $85,200 million in 2023, $96,169 million in 2024, and $109,158 million in 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Products and Services Performance / Statements of Operations"
+  },
+  {
+    "id": "trend_03",
+    "category": "comparison_trend",
+    "question": "How did Apple's total gross margin percentage change across fiscal 2023, 2024, and 2025?",
+    "answer": "It rose steadily: 44.1% in 2023, 46.2% in 2024, and 46.9% in 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Gross Margin"
+  },
+  {
+    "id": "trend_04",
+    "category": "comparison_trend",
+    "question": "How did Apple's net income trend across fiscal 2023, 2024, and 2025?",
+    "answer": "It dipped then rose: $96,995 million in 2023, $93,736 million in 2024, and $112,010 million in 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 8 - Statements of Operations"
+  },
+  {
+    "id": "trend_05",
+    "category": "comparison_trend",
+    "question": "How did Apple's Greater China net sales trend across fiscal 2023, 2024, and 2025?",
+    "answer": "They declined each year: $72,559 million in 2023, $66,952 million in 2024, and $64,377 million in 2025.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Item 7 - Segment Operating Performance"
+  },
+
+  {
+    "id": "unanswerable_01",
+    "category": "unanswerable",
+    "question": "What is Apple's projected total net sales for fiscal 2026?",
+    "answer": "I don't know based on the provided filings. The 10-K does not provide forward revenue projections for 2026.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - forward guidance not disclosed"
+  },
+  {
+    "id": "unanswerable_02",
+    "category": "unanswerable",
+    "question": "What is the home address of Apple's CEO?",
+    "answer": "I don't know based on the provided filings. This personal information is not disclosed in the 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - personal information"
+  },
+  {
+    "id": "unanswerable_03",
+    "category": "unanswerable",
+    "question": "How many iPhone units (not dollars) did Apple sell in fiscal 2025?",
+    "answer": "I don't know based on the provided filings. Apple reports iPhone net sales in dollars, not unit volumes, in this 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - unit sales not disclosed"
+  },
+  {
+    "id": "unanswerable_04",
+    "category": "unanswerable",
+    "question": "What was Apple's stock price on the last trading day of fiscal 2025?",
+    "answer": "I don't know based on the provided filings. A specific closing stock price for that day is not stated in the 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - daily stock price not disclosed"
+  },
+  {
+    "id": "unanswerable_05",
+    "category": "unanswerable",
+    "question": "What is the marketing budget Apple has allocated for fiscal 2026?",
+    "answer": "I don't know based on the provided filings. The 10-K does not disclose a forward marketing budget.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - forward budget not disclosed"
+  },
+  {
+    "id": "unanswerable_06",
+    "category": "unanswerable",
+    "question": "How much revenue did the Apple Vision Pro generate in fiscal 2025?",
+    "answer": "I don't know based on the provided filings. Apple does not break out Vision Pro revenue separately in this 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - product-level revenue for Vision Pro not disclosed"
+  },
+  {
+    "id": "unanswerable_07",
+    "category": "unanswerable",
+    "question": "What were Microsoft's total net sales in fiscal 2025?",
+    "answer": "I don't know based on the provided filings. This filing covers Apple, not Microsoft.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - different company"
+  },
+  {
+    "id": "unanswerable_08",
+    "category": "unanswerable",
+    "question": "What annual salary does Apple's CFO receive?",
+    "answer": "I don't know based on the provided filings. Executive compensation details are in the proxy statement, not this 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - compensation in proxy statement, incorporated by reference"
+  },
+  {
+    "id": "unanswerable_09",
+    "category": "unanswerable",
+    "question": "How many retail stores did Apple operate at the end of fiscal 2025?",
+    "answer": "I don't know based on the provided filings. A specific count of retail stores is not stated in this 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - store count not disclosed"
+  },
+  {
+    "id": "unanswerable_10",
+    "category": "unanswerable",
+    "question": "What is Apple's planned dividend per share for fiscal 2026?",
+    "answer": "I don't know based on the provided filings. Future dividends are subject to Board declaration and are not specified for 2026 in the 10-K.",
+    "company": "AAPL",
+    "year": 2025,
+    "source_hint": "Not in filing - future dividends subject to Board declaration"
   }
 ]

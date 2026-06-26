@@ -31,14 +31,17 @@ METRICS = ["faithfulness", "answer_relevancy", "context_precision"]
 
 # ── Test-set loader ────────────────────────────────────────────────────────────
 
-def load_test_set() -> list[dict]:
-    """Load test_set.json, skipping placeholder entries."""
+def load_test_set(limit: int | None = None) -> list[dict]:
+    """Load test_set.json, skipping placeholder entries, optionally capped at limit."""
     with open(TEST_SET_PATH, encoding="utf-8") as f:
         items = json.load(f)
-    return [
+    items = [
         item for item in items
         if not str(item.get("question", "")).startswith("FILL IN")
     ]
+    if limit is not None:
+        items = items[:limit]
+    return items
 
 
 # ── Baseline pipeline (dense-only, no BM25, no reranking) ─────────────────────
@@ -86,7 +89,7 @@ def collect_rows(items: list[dict], pipeline_fn) -> dict:
         rows["question"].append(q)
         rows["answer"].append(result["answer"])
         rows["contexts"].append([s["text"] for s in result["sources"]])
-        rows["ground_truth"].append(item["ground_truth"])
+        rows["ground_truth"].append(item.get("answer", item.get("ground_truth", "")))
     return rows
 
 
@@ -186,9 +189,16 @@ def main() -> None:
         default="compare",
         help="Pipeline variant(s) to evaluate (default: compare)",
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Cap evaluation at the first N questions (default: all)",
+    )
     args = parser.parse_args()
 
-    items = load_test_set()
+    items = load_test_set(limit=args.limit)
     if not items:
         print("No runnable questions in test_set.json (all entries are placeholders).")
         sys.exit(1)
