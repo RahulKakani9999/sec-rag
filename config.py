@@ -30,4 +30,5 @@ RERANK_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 # Generation
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 LLM_MODEL = "llama-3.3-70b-versatile"
+LLM_JUDGE_MODEL = "llama-3.1-8b-instant"  # cheaper model for RAGAS judge calls
 SEC_USER_AGENT = os.getenv("SEC_USER_AGENT")
