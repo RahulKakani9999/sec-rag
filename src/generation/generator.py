@@ -1,6 +1,9 @@
 """Build the prompt, call the LLM, enforce citations and refusal."""
 from __future__ import annotations
 
+import re
+import time
+
 import groq
 
 import config
@@ -47,21 +50,38 @@ def _build_prompt(question: str, chunks: list[dict]) -> str:
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
+_RETRY_RE = re.compile(r"try again in ([\d.]+)s", re.IGNORECASE)
+_MAX_RETRIES = 4
+
+
 def generate(question: str, chunks: list[dict]) -> str:
     """Call the LLM and return a cited answer grounded in chunks.
 
     If chunks is empty the model is told there is no context, which triggers
-    the refusal clause in the system prompt.
+    the refusal clause in the system prompt.  Retries automatically on
+    transient TPM 429s, sleeping for the retry duration stated in the error.
     """
     user_prompt = _build_prompt(question, chunks)
+    messages = [
+        {"role": "system", "content": _SYSTEM},
+        {"role": "user",   "content": user_prompt},
+    ]
 
-    response = _get_client().chat.completions.create(
-        model=config.LLM_MODEL,
-        messages=[
-            {"role": "system", "content": _SYSTEM},
-            {"role": "user",   "content": user_prompt},
-        ],
-        temperature=0.0,  # deterministic — citations must be precise
-        max_tokens=1024,
-    )
-    return response.choices[0].message.content.strip()
+    for attempt in range(_MAX_RETRIES):
+        try:
+            response = _get_client().chat.completions.create(
+                model=config.LLM_MODEL,
+                messages=messages,
+                temperature=0.0,
+                max_tokens=1024,
+            )
+            return response.choices[0].message.content.strip()
+        except groq.RateLimitError as exc:
+            if attempt == _MAX_RETRIES - 1:
+                raise
+            m = _RETRY_RE.search(str(exc))
+            wait = float(m.group(1)) + 2.0 if m else 15.0
+            print(f"    [rate limit] waiting {wait:.1f}s before retry {attempt + 2}/{_MAX_RETRIES} ...")
+            time.sleep(wait)
+
+    raise RuntimeError("generate() exhausted retries")

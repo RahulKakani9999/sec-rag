@@ -390,7 +390,7 @@ def main() -> None:
         full_scores, full_df = run_ragas(full_rows, judge_model=args.judge_model)
         new_records = build_records(items, full_df)
         append_results(new_records)
-        print(f"  Saved {len(new_records)} record(s) → {RESULTS_PATH.name}")
+        print(f"  Saved {len(new_records)} record(s) -> {RESULTS_PATH.name}")
 
     if args.mode in ("baseline", "compare"):
         print(f"\n[Baseline]  generating answers (delay={args.delay}s) ...")
