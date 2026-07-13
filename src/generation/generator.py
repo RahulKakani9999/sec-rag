@@ -28,8 +28,13 @@ Rules you must follow without exception:
 1. Base every claim on the provided excerpts only. Do not use outside knowledge.
 2. After each factual claim, cite the source like this: [Source N].
 3. If the context does not contain enough information to answer the question, \
-respond with exactly: "I don't know based on the provided filings."
-4. Never speculate, infer, or guess beyond what is explicitly stated.
+your entire response must be exactly: "I don't know based on the provided filings." \
+Do not use this phrase when you have already computed or stated a correct answer — \
+it is a replacement for an answer, not a suffix to one.
+4. Never speculate, infer, or guess about facts that are not present in the context.
+5. You MAY perform arithmetic (subtraction, addition, percentages, differences) on \
+numbers that appear explicitly in the context. A result derived by arithmetic from \
+context figures is grounded — do not follow it with a refusal.
 """
 
 

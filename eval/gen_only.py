@@ -5,7 +5,8 @@ sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent))
 
 from src.pipeline import answer_question
 
-IDS = ["lookup_14", "calc_06", "calc_07"]
+IDS = ["calc_07", "lookup_14",
+       "unanswerable_01", "unanswerable_02", "unanswerable_03", "unanswerable_04"]
 
 test_set = json.loads(
     (__import__("pathlib").Path(__file__).parent / "test_set.json").read_text(encoding="utf-8")
