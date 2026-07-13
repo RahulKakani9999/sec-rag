@@ -30,7 +30,9 @@ def rerank(
     if not candidates:
         return []
 
-    pairs = [(query, c["text"]) for c in candidates]
+    # Normalize tabs to spaces so the cross-encoder (trained on prose) can parse
+    # financial tables. The stored text and BM25 index keep the original tabs.
+    pairs = [(query, c["text"].replace("\t", "  ")) for c in candidates]
     scores = get_model().predict(pairs)
 
     ranked = sorted(zip(scores, candidates), key=lambda x: x[0], reverse=True)

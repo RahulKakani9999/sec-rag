@@ -68,6 +68,15 @@ def _is_table_line(line: str) -> bool:
     return "\t" in line
 
 
+# Character-length thresholds for the statement-structure fusion fix.
+# Financial statement date-header rows ("September 27, 2025  September 28, 2024")
+# and section labels ("ASSETS:", "LIABILITIES AND SHAREHOLDERS' EQUITY:") are
+# always short.  Keeping these thresholds conservative avoids touching regular
+# text paragraphs or multi-row tables.
+_SMALL_BUF_CHARS = 120   # text buffers ≤ this are fused into the next table
+_TINY_TABLE_CHARS = 120  # table chunks ≤ this don't reset overlap_tail
+
+
 # ── Section splitting ─────────────────────────────────────────────────────────
 
 def _split_sections(text: str) -> list[tuple[str, str]]:
@@ -181,14 +190,36 @@ def _pack(
         text_chars = len(text)
 
         if is_table:
-            # Flush current text buffer first
-            if buf:
-                _emit()
-            # Emit table as its own chunk; prepend overlap tail for context
-            table_text = (overlap_tail + "\n\n" + text).strip() if overlap_tail else text
-            chunks.append(Chunk(text=table_text, metadata=dict(base_meta)))
-            # Tables are self-contained; don't carry their content into next chunk
-            overlap_tail = ""
+            buf_combined = "\n\n".join(p for p in buf if p.strip()).strip()
+            if buf and buf_chars <= _SMALL_BUF_CHARS:
+                # Small text buffer (e.g. "ASSETS:", "LIABILITIES:") — fuse it
+                # with the following table instead of emitting an orphaned chunk.
+                context = (overlap_tail + "\n\n" + buf_combined).strip() if overlap_tail else buf_combined
+                table_text = (context + "\n\n" + text).strip() if context else text
+                buf = []
+                buf_chars = 0
+                chunks.append(Chunk(text=table_text, metadata=dict(base_meta)))
+                # After fusing, reset overlap so the next fused section label
+                # doesn't inherit raw numeric table lines as its preamble.
+                # Tiny tables (date-header rows) keep overlap so the statement
+                # name still carries forward to the next data table.
+                if len(text) > _TINY_TABLE_CHARS:
+                    overlap_tail = ""
+            else:
+                if buf:
+                    _emit()
+                table_text = (overlap_tail + "\n\n" + text).strip() if overlap_tail else text
+                chunks.append(Chunk(text=table_text, metadata=dict(base_meta)))
+                # Tiny tables (date-header rows ≤ _TINY_TABLE_CHARS, e.g.
+                # "September 27, 2025  September 28, 2024") must NOT reset
+                # overlap_tail — the statement name from the preceding text chunk
+                # must carry forward to the next data table.  Fold the tiny
+                # table text into overlap_tail so the data table's preamble
+                # includes both the statement name AND the date row.
+                if len(text) > _TINY_TABLE_CHARS:
+                    overlap_tail = ""
+                else:
+                    overlap_tail = (overlap_tail + "\n\n" + text).strip()[-overlap_chars:]
         else:
             # Split the unit first if it's larger than one chunk on its own.
             sub_units = _split_text(text, size_chars) if text_chars > size_chars else [text]

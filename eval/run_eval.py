@@ -17,6 +17,8 @@ Flags:
   --judge-model   Groq model ID for RAGAS judge calls (default: config.LLM_JUDGE_MODEL)
                   Generation always uses config.LLM_MODEL regardless of this flag.
   --summary       print averages from eval/results.jsonl and exit (no scoring)
+  --results-file  path to the JSONL results file (default: eval/results.jsonl)
+                  use a different path to keep before/after scores separate
 """
 from __future__ import annotations
 
@@ -348,7 +350,14 @@ def main() -> None:
                         help="Groq model for RAGAS judge calls (default: config.LLM_JUDGE_MODEL)")
     parser.add_argument("--summary", action="store_true",
                         help="Print averages from results.jsonl and exit (no scoring)")
+    parser.add_argument("--results-file", default=None, metavar="PATH",
+                        help="JSONL results file to read/write (default: eval/results.jsonl)")
     args = parser.parse_args()
+
+    # Override module-level RESULTS_PATH if caller supplied a path
+    if args.results_file:
+        global RESULTS_PATH
+        RESULTS_PATH = Path(args.results_file)
 
     # ── Summary-only mode ──
     if args.summary:

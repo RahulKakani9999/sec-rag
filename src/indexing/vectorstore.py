@@ -43,6 +43,19 @@ def get_collection(reset: bool = False) -> chromadb.Collection:
     )
 
 
+def _embed_input(chunk: Chunk) -> str:
+    """Prepend section/ticker/year so orphaned data chunks embed with document context.
+
+    The prefix is used only for embedding — the original text is stored in Chroma
+    unchanged so retrieved snippets stay clean.
+    """
+    section = chunk.metadata.get("section", "")
+    ticker  = chunk.metadata.get("ticker", "")
+    year    = chunk.metadata.get("year", "")
+    prefix  = f"[{section} -- {ticker} {year}]\n" if section else ""
+    return f"{prefix}{chunk.text}"
+
+
 def add_chunks(chunks: list[Chunk], reset: bool = False) -> tuple[int, int]:
     """Embed chunks and upsert into Chroma.
 
@@ -51,8 +64,8 @@ def add_chunks(chunks: list[Chunk], reset: bool = False) -> tuple[int, int]:
     if not chunks:
         return 0, 0
 
-    texts = [c.text for c in chunks]
-    embeddings: np.ndarray = embed_texts(texts, show_progress=True)
+    embed_inputs = [_embed_input(c) for c in chunks]
+    embeddings: np.ndarray = embed_texts(embed_inputs, show_progress=True)
     dim = int(embeddings.shape[1])
 
     collection = get_collection(reset=reset)

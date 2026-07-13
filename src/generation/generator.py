@@ -50,8 +50,21 @@ def _build_prompt(question: str, chunks: list[dict]) -> str:
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
-_RETRY_RE = re.compile(r"try again in ([\d.]+)s", re.IGNORECASE)
-_MAX_RETRIES = 4
+# Parses "try again in 17m28.896s" (minutes+seconds) or "try again in 28.896s"
+_RETRY_RE_MS = re.compile(r"try again in (\d+)m([\d.]+)s", re.IGNORECASE)
+_RETRY_RE_S  = re.compile(r"try again in ([\d.]+)s",        re.IGNORECASE)
+_MAX_RETRIES = 6   # more retries to ride out TPD rolling-window waits
+
+
+def _parse_wait(exc_str: str) -> float:
+    """Extract wait seconds from a Groq rate-limit error message."""
+    m = _RETRY_RE_MS.search(exc_str)
+    if m:
+        return int(m.group(1)) * 60 + float(m.group(2)) + 5.0
+    m = _RETRY_RE_S.search(exc_str)
+    if m:
+        return float(m.group(1)) + 2.0
+    return 20.0
 
 
 def generate(question: str, chunks: list[dict]) -> str:
@@ -59,7 +72,7 @@ def generate(question: str, chunks: list[dict]) -> str:
 
     If chunks is empty the model is told there is no context, which triggers
     the refusal clause in the system prompt.  Retries automatically on
-    transient TPM 429s, sleeping for the retry duration stated in the error.
+    transient TPM/TPD 429s, sleeping for the retry duration stated in the error.
     """
     user_prompt = _build_prompt(question, chunks)
     messages = [
@@ -79,9 +92,8 @@ def generate(question: str, chunks: list[dict]) -> str:
         except groq.RateLimitError as exc:
             if attempt == _MAX_RETRIES - 1:
                 raise
-            m = _RETRY_RE.search(str(exc))
-            wait = float(m.group(1)) + 2.0 if m else 15.0
-            print(f"    [rate limit] waiting {wait:.1f}s before retry {attempt + 2}/{_MAX_RETRIES} ...")
+            wait = _parse_wait(str(exc))
+            print(f"    [rate limit] waiting {wait:.0f}s before retry {attempt + 2}/{_MAX_RETRIES} ...")
             time.sleep(wait)
 
     raise RuntimeError("generate() exhausted retries")
