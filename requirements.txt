@@ -1,26 +1,11 @@
-# Ingestion
-sec-edgar-downloader>=5.0.0
-unstructured[html]>=0.12.0
-beautifulsoup4>=4.12.0
-lxml>=5.0.0
+# Production requirements — used by Streamlit Cloud.
+# For local development (ingestion, eval), use requirements_dev.txt instead.
 
-# Embeddings & retrieval
-sentence-transformers>=2.5.0
-chromadb>=0.4.22
-rank-bm25>=0.2.2
-
-# LLM
-groq>=0.4.0
-
-# Evaluation
-ragas>=0.1.0
-datasets>=2.16.0
-
-# App
 streamlit>=1.31.0
-
-# Utilities
-python-dotenv>=1.0.0
-pandas>=2.0.0
+sentence-transformers>=2.5.0
+chromadb>=1.0.0
+rank-bm25>=0.2.2
+groq>=0.4.0
 numpy>=1.26.0
+python-dotenv>=1.0.0
 tqdm>=4.66.0

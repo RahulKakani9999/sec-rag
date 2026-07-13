@@ -1,3 +1,14 @@
+---
+title: SEC 10-K Research Assistant
+emoji: 📊
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.31.0
+app_file: app/streamlit_app.py
+pinned: false
+---
+
 # SEC 10-K RAG — Ask Questions Across Annual Reports
 
 Ask a plain-English question about public companies' annual filings and get a
