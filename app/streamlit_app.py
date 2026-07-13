@@ -63,43 +63,67 @@ if not config.GROQ_API_KEY:
     )
     st.stop()
 
+# ── Session state initialisation ──────────────────────────────────────────────
+
+# "question" is the single source of truth for what's in the text box.
+# "result"   holds the last pipeline output so it survives reruns.
+if "question" not in st.session_state:
+    st.session_state["question"] = ""
+if "result" not in st.session_state:
+    st.session_state["result"] = None
+
 # ── Example questions ─────────────────────────────────────────────────────────
 
 EXAMPLES = [
-    "What were Apple's total assets as of September 27, 2025?",
     "What was Apple's total net sales in fiscal 2025?",
-    "How much did Apple spend on R&D in fiscal 2025?",
-    "What were Apple's total liabilities as of September 27, 2025?",
+    "What was Apple's net income in fiscal 2025?",
+    "What were Apple's net sales in the Americas segment in fiscal 2025?",
+    "What was Apple's total gross margin in fiscal 2025?",
 ]
+
+# should_run is a local flag: True when any trigger fires this rerun.
+should_run = False
 
 st.markdown("**Try an example or type your own question:**")
 cols = st.columns(2)
-chosen_example = None
 for i, ex in enumerate(EXAMPLES):
     if cols[i % 2].button(ex, key=f"ex_{i}", use_container_width=True):
-        chosen_example = ex
+        # Write into session_state BEFORE the text_input renders below so
+        # the widget picks up the new value in this same rerun.
+        st.session_state["question"] = ex
+        should_run = True
 
 st.markdown("")
 
-# ── Question form ─────────────────────────────────────────────────────────────
+# ── Input + Ask button ────────────────────────────────────────────────────────
 
-with st.form("question_form", clear_on_submit=False):
-    question = st.text_input(
-        "Your question",
-        value=chosen_example or "",
-        placeholder="What were Apple's total assets as of September 27, 2025?",
-        label_visibility="collapsed",
-    )
-    submitted = st.form_submit_button("Ask", type="primary", use_container_width=True)
+# key="question" binds this widget to st.session_state["question"].
+# Streamlit reads the current state value to populate the box, and writes
+# back on every user edit — no value= argument needed.
+st.text_input(
+    "Your question",
+    key="question",
+    placeholder="What were Apple's total assets as of September 27, 2025?",
+    label_visibility="collapsed",
+)
+
+if st.button("Ask", type="primary", use_container_width=True):
+    should_run = True
 
 # ── Pipeline ──────────────────────────────────────────────────────────────────
 
-if submitted and question.strip():
-    from src.pipeline import answer_question
+if should_run:
+    q = st.session_state["question"].strip()
+    if q:
+        from src.pipeline import answer_question
+        with st.spinner("Retrieving and generating…"):
+            st.session_state["result"] = answer_question(q)
+    else:
+        st.warning("Please enter a question before clicking Ask.")
 
-    with st.spinner("Retrieving and generating…"):
-        result = answer_question(question.strip())
-
+# Display the last result (persists across reruns until a new query replaces it).
+if st.session_state["result"] is not None:
+    result  = st.session_state["result"]
     answer  = result["answer"]
     sources = result["sources"]
 
@@ -113,7 +137,7 @@ if submitted and question.strip():
             ticker  = meta.get("ticker", "")
             year    = meta.get("year", "")
             score   = src.get("rerank_score", src.get("score", 0.0))
-            # Normalize tab-separated table data for readable display
+            # Normalise tab-separated table data for readable display
             text    = src["text"].replace("\t", "  ")
 
             st.markdown(
@@ -123,6 +147,3 @@ if submitted and question.strip():
             st.code(text[:700] + ("…" if len(text) > 700 else ""), language=None)
             if i < len(sources):
                 st.divider()
-
-elif submitted:
-    st.warning("Please enter a question before clicking Ask.")
